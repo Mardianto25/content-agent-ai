@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f2f0e8">
+    <meta name="description" content="Studio video TikTok berbasis Gemini AI.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <script type="module" src="/app.js"></script>
+    <title>Content Agent Studio</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Content Agent Studio beranda">
+          <span class="brand-mark" aria-hidden="true">C</span>
+          <span>content<span class="brand-light">agent</span></span>
+        </a>
+        <div class="topbar-meta"><span class="live-dot"></span> STUDIO / 01</div>
+        <a class="topbar-link" href="https://developers.tiktok.com/" target="_blank" rel="noreferrer">TIKTOK API <span aria-hidden="true">↗</span></a>
+      </header>
+
+      <main class="workspace">
+        <section class="intro">
+          <p class="eyebrow"><span>AI VIDEO WORKFLOW</span><span class="eyebrow-rule"></span><span>NO TEMPLATE LIMITS</span></p>
+          <h1>Ide jadi<br><span>gambar bergerak.</span></h1>
+          <p class="intro-copy">Satu topik. Naskah, visual, dan video vertikal dirancang otomatis oleh Gemini.</p>
+        </section>
+
+        <div class="work-grid">
+          <section class="brief-panel" aria-labelledby="brief-title">
+            <div class="panel-heading">
+              <div><p class="section-index">01 / THE BRIEF</p><h2 id="brief-title">Mulai dari ide</h2></div>
+              <span class="spark-mark" aria-hidden="true">✳</span>
+            </div>
+
+            <form id="brief-form">
+              <label class="field-label" for="topic">TOPIK VIDEO</label>
+              <textarea id="topic" name="topic" rows="3" maxlength="400" placeholder="Contoh: kenapa langit senja berubah warna?" required></textarea>
+
+              <div class="field-row">
+                <div class="field-group">
+                  <label class="field-label" for="tone">GAYA BICARA</label>
+                  <select id="tone" name="tone">
+                    <option value="informatif dan menarik">Informatif</option>
+                    <option value="santai, lucu, dan ringan">Santai</option>
+                    <option value="dramatis dan sinematik">Dramatis</option>
+                    <option value="hangat dan inspiratif">Inspiratif</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="audience">PENONTON</label>
+                  <input id="audience" name="audience" maxlength="120" value="penonton TikTok Indonesia">
+                </div>
+              </div>
+
+              <button class="primary-button" id="generate-button" type="submit">
+                <span class="button-label">Rancang video</span><span class="button-arrow" aria-hidden="true">↗</span>
+              </button>
+              <p class="form-note">3 visual AI · 15 detik · format 9:16</p>
+            </form>
+
+            <div class="pipeline-list" aria-label="Tahapan pembuatan">
+              <div class="pipeline-step"><span class="step-number">01</span><span>Naskah & konsep</span><span class="step-state">GEMINI</span></div>
+              <div class="pipeline-step"><span class="step-number">02</span><span>Visual per adegan</span><span class="step-state">IMAGE AI</span></div>
+              <div class="pipeline-step"><span class="step-number">03</span><span>Render MP4</span><span class="step-state">FFMPEG</span></div>
+            </div>
+          </section>
+
+          <section class="output-panel" aria-labelledby="output-title">
+            <div class="panel-heading output-heading">
+              <div><p class="section-index">02 / THE CUT</p><h2 id="output-title">Ruang pratinjau</h2></div>
+              <span class="output-badge" id="output-badge">MENUNGGU IDE</span>
+            </div>
+
+            <div class="empty-state" id="empty-state">
+              <div class="empty-art" aria-hidden="true"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="empty-core">✳</span><span class="empty-index">FRAME<br>00:00</span></div>
+              <p>Frame pertama dimulai<br>dari sebuah ide.</p>
+              <span>HASIL AKAN MUNCUL DI SINI</span>
+            </div>
+
+            <div class="result-state" id="result-state" hidden>
+              <div class="video-wrap"><video id="video-preview" controls playsinline preload="metadata"></video><span class="video-format">9:16 <span>·</span> MP4</span></div>
+              <div class="result-copy">
+                <p class="section-index">VIDEO SIAP DITINJAU</p>
+                <h3 id="result-title"></h3>
+                <p class="caption-text" id="result-caption"></p>
+                <div class="scene-strip" id="scene-strip" aria-label="Visual adegan"></div>
+                <div class="scene-script" id="scene-script"></div>
+                <button class="draft-button" id="draft-button" type="button"><span aria-hidden="true">↑</span><span class="button-label">Kirim ke Draft TikTok</span></button>
+                <p class="draft-note">Video masuk ke Inbox TikTok. Publikasi tetap Anda selesaikan dari aplikasi.</p>
+              </div>
+            </div>
+
+            <div class="status-line" id="status-line" role="status" aria-live="polite" hidden></div>
+          </section>
+        </div>
+        <footer class="page-footer"><span>CONTENT AGENT STUDIO</span><span>BUILT FOR THE NEXT SCROLL <span class="footer-star">✳</span></span></footer>
+      </main>
+    </div>
+  </body>
+</html>
