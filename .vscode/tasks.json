@@ -1,0 +1,69 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Install Content Agent dependencies",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"install"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Audit production dependencies",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"audit",
+				"--omit=dev"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Update video renderer dependency",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"install"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run Content Agent Studio",
+			"type": "shell",
+			"command": "node",
+			"args": [
+				"server.js"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check configured credentials",
+			"type": "shell",
+			"command": "node",
+			"args": [
+				"-e",
+				"process.loadEnvFile(); console.log(JSON.stringify({ geminiConfigured: Boolean(process.env.GEMINI_API_KEY), tiktokConfigured: Boolean(process.env.TIKTOK_ACCESS_TOKEN) }));"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart Content Agent on port 3000",
+			"type": "shell",
+			"command": "powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$listener = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue; if ($listener) { $listener.OwningProcess | Sort-Object -Unique | ForEach-Object { Stop-Process -Id $_ -Force } }; node server.js"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

@@ -71,16 +71,21 @@ form.addEventListener("submit", async (event) => {
   generateButton.disabled = true;
   generateButton.querySelector(".button-label").textContent = "Sedang merancang...";
   outputBadge.textContent = "SEDANG DIRANCANG";
-  showStatus("Gemini sedang menulis naskah dan membuat visual. Proses ini bisa memakan waktu beberapa menit.");
+  showStatus("Gemini sedang menulis naskah, merakit audio, dan merender video. Proses ini bisa memakan waktu beberapa menit.");
 
   const formData = new FormData(form);
   try {
-    const project = await generateContent({
-      topic: formData.get("topic"),
-      tone: formData.get("tone"),
-      audience: formData.get("audience"),
+    const response = await fetch("/api/agent", {
+      method: "POST",
+      body: formData, // Kirim seluruh form termasuk file mp3 dan durasi total
     });
-    renderProject(project);
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error || "Gagal memproses permintaan di server.");
+    }
+
+    renderProject(result);
     showStatus("Video selesai dirender. Tinjau hasilnya sebelum mengirim ke TikTok.", "success");
   } catch (error) {
     outputBadge.textContent = "PERLU PERHATIAN";

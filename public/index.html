@@ -37,7 +37,7 @@
               <span class="spark-mark" aria-hidden="true">✳</span>
             </div>
 
-            <form id="brief-form">
+            <form id="brief-form" enctype="multipart/form-data">
               <label class="field-label" for="topic">TOPIK VIDEO</label>
               <textarea id="topic" name="topic" rows="3" maxlength="400" placeholder="Contoh: kenapa langit senja berubah warna?" required></textarea>
 
@@ -57,11 +57,49 @@
                 </div>
               </div>
 
-              <button class="primary-button" id="generate-button" type="submit">
+              <!-- Pilihan Durasi Total & Mode Audio -->
+              <div class="field-row" style="margin-top: 15px;">
+                <div class="field-group">
+                  <label class="field-label" for="totalDuration">DURASI TOTAL VIDEO</label>
+                  <select id="totalDuration" name="totalDuration">
+                    <option value="9">9 Detik</option>
+                    <option value="15" selected>15 Detik</option>
+                    <option value="30">30 Detik</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="audioMode">MODE AUDIO</label>
+                  <select id="audioMode" name="audioMode" onchange="toggleUploadInput()">
+                    <option value="tts_and_music">Narasi (TTS) + Backsound</option>
+                    <option value="music_only">Hanya Backsound Saja</option>
+                    <option value="mute">Tanpa Audio (Bisu)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Input Upload Backsound Kustom -->
+              <div id="uploadContainer" style="display: none; margin-top: 15px;">
+                <label class="field-label" for="customBacksound">UPLOAD BACKSOUND (.MP3)</label>
+                <input type="file" id="customBacksound" name="customBacksound" accept=".mp3" style="width: 100%; padding: 8px; box-sizing: border-box; background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.2); border-radius: 6px; color: inherit;">
+              </div>
+
+              <button class="primary-button" id="generate-button" type="submit" style="margin-top: 20px;">
                 <span class="button-label">Rancang video</span><span class="button-arrow" aria-hidden="true">↗</span>
               </button>
-              <p class="form-note">3 visual AI · 15 detik · format 9:16</p>
+              <p class="form-note">Format 9:16 · Audio & Durasi Kustom</p>
             </form>
+
+            <script>
+              function toggleUploadInput() {
+                const mode = document.getElementById('audioMode').value;
+                const uploadContainer = document.getElementById('uploadContainer');
+                if (mode === 'tts_and_music' || mode === 'music_only') {
+                  uploadContainer.style.display = 'block';
+                } else {
+                  uploadContainer.style.display = 'none';
+                }
+              }
+            </script>
 
             <div class="pipeline-list" aria-label="Tahapan pembuatan">
               <div class="pipeline-step"><span class="step-number">01</span><span>Naskah & konsep</span><span class="step-state">GEMINI</span></div>
